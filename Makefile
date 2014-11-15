@@ -40,8 +40,7 @@ maas-image:
 	docker commit `docker ps -l -q` ${IMAGE_NAME}
 
 start:
-	docker run -d -v /dev/log:/dev/log -p 5240:5240 ${IMAGE_NAME} make run
-	echo "`docker ps -q`" >> maas-container.id
+	docker run -d -v /dev/log:/dev/log -p 5240:5240 ${IMAGE_NAME} make run | tee maas-container.id
 
 stop:
-	docker stop `cat maas-container.id`
+	docker stop -t 0 `cat maas-container.id`
