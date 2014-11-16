@@ -6,9 +6,10 @@ Docker maas image
 
 Usage:
 
-> make maas-image                  # Create maas image
-> IMAGE_NAME=fish make maas-image  # Create image, but call it "fish"
-> make run                         # Run the image
+> make build                     # Create "maas" image
+> IMAGE_NAME=me/maas make build  # Create image as "me/maas"
+> make start                     # Run the image
+> make stop                      # Run the image
 
 endef
 
@@ -22,25 +23,22 @@ endif
 help:
 	$(info ${HELP_TEXT})
 
-maas-repo:
+build:
 	if [ -d maas ]; then \
 	    bzr pull --directory maas --overwrite; \
 	else \
 	    bzr branch lp:maas maas; \
 	fi
 
-maas-image:
-	${MAKE} maas-repo
-	docker build -t ${IMAGE_NAME} .
-	# The following commands can't be run from Dockerfile
-	# As they need access to /dev/log
-	docker run -v /dev/log:/dev/log ${IMAGE_NAME} make syncdb
-	docker commit `docker ps -l -q` ${IMAGE_NAME}
-	docker run -v /dev/log:/dev/log ${IMAGE_NAME} make sampledata
-	docker commit `docker ps -l -q` ${IMAGE_NAME}
+	cp Dockerfile maas/Dockerfile
+
+	cd maas; docker build -t ${IMAGE_NAME} .
 
 start:
-	docker run -d -v /dev/log:/dev/log -p 5240:5240 ${IMAGE_NAME} make run | tee maas-container.id
+	cd maas; docker run -d -v /dev/log:/dev/log -p 5240:5240 ${IMAGE_NAME} > maas-container.id
 
 stop:
-	docker stop -t 0 `cat maas-container.id`
+	docker stop -t 0 `cat maas/maas-container.id`
+
+clean:
+	rm -rf maas
