@@ -1,6 +1,5 @@
 FROM ubuntu:14.04
 
-# Only run noninteractively
 ENV DEBIAN_FRONTEND noninteractive
 
 # Install dependencies
