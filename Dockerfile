@@ -23,5 +23,4 @@ RUN rsyslogd && su maas -c "make syncdb"
 RUN rsyslogd && su maas -c "make sampledata"
 
 # Prepare to run the webservice
-USER maas
-CMD make run
+CMD rsyslogd && su maas -c "make run"
