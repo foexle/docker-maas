@@ -23,15 +23,13 @@ endif
 help:
 	$(info ${HELP_TEXT})
 
+maas:
+	bzr branch lp:maas maas
+
 build:
-	if [ -d maas ]; then \
-	    bzr pull --directory maas --overwrite; \
-	else \
-	    bzr branch lp:maas maas; \
-	fi
-
+	${MAKE} clean
+	${MAKE} maas
 	cp Dockerfile maas/Dockerfile
-
 	cd maas; docker build -t ${IMAGE_NAME} .
 
 start:
