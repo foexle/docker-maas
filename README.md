@@ -1,8 +1,9 @@
 Docker image for the Maas web interface
 ===
 
-* auto-gen TOC:
-{:toc}
+A Docker image for serving the MAAS web interface for the [MAAS project](https://launchpad.net/maas).
+
+Note this image contains all the MAAS files, so it's tricky to edit them. If you'd like to run the web interface from a locally checked out version of [MAAS](https://launchpad.net/maas, please use [docker-maas-dev](https://github.com/ubuntudesign/docker-maas-dev).
 
 Usage
 ---
