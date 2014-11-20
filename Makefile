@@ -23,6 +23,7 @@ run:
 	docker run --tty --interactive --publish 5240:5240 ${image_name}
 
 build:
+	rm -rf maas/
 	bzr branch ${project_repo}
 	docker build -t ${image_name} .
 	rm -rf maas/

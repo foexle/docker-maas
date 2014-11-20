@@ -10,7 +10,9 @@ Usage
 
 You can run the Maas web interface statically (*not* for development) as follows:
 
-    docker run --tty --interactive --publish 5240:5240 ubuntudesign/maas
+``` bash
+docker run --tty --interactive --publish 5240:5240 ubuntudesign/maas
+```
   
 Now visit <http://localhost:5240> to view the site.
 
@@ -22,3 +24,13 @@ You can login to the web interface with one of:
 
     usernames: "admin" or "test"
     password: test
+
+Rebuild image
+---
+
+You can rebuild the image from [the Github repository](https://github.com/ubuntudesign/docker-maas) with:
+
+``` bash
+make build
+docker push ubuntudesign/maas
+```
