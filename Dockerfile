@@ -8,15 +8,15 @@ RUN apt-get update && apt-get -y --no-install-recommends install make apache2 au
 # Add the maas user
 RUN useradd -G postgres maas
 
-# Get the code for our working directory
-RUN bzr branch lp:maas /maas
+# Copy in the code for our working directory
+ADD maas/ /maas
 WORKDIR /maas
-
-# Set permissions
-RUN chown -R maas:maas /maas
 
 # Copy in targets
 RUN tee -a /etc/tgt/targets.conf < contrib/tgt.conf
+
+# Set permissions
+RUN chown -R maas:maas /maas
 
 # Build code (as `maas` user)
 RUN su maas -c "make build"
