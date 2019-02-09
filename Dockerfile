@@ -21,7 +21,7 @@ RUN service postgresql start && \
     /tmp/scripts/regiond-init-start.sh && \
     /usr/bin/maas init --admin-email test@test.com --admin-password test --admin-username test
 
-# Init other MAAS services
+# Cleanup for services 
 RUN install -d -o proxy -g proxy -m 750 /var/cache/maas-proxy/;  \
     install -d -o proxy -g proxy -m 750 /var/log/maas/proxy/; \
     install -m 750 -o proxy -g proxy -d /var/spool/maas-proxy/; \
