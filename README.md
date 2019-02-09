@@ -1,9 +1,13 @@
 Docker image for the Maas web interface
 ===
+This Docker image provides MAAS UI and API. This is not yet a fully functional MAAS environment it's designed for API testing purposes. 
 
-A [Docker image](https://hub.docker.com/u/ubuntudesign/maas) for testing the [MAAS](https://launchpad.net/maas) web interface.
+A [Docker image](https://hub.docker.com/r/foexle/maas-server) for testing the [MAAS](https://launchpad.net/maas) web interface.
 
-Note this image contains all the MAAS files, so it's tricky to edit them. If you'd like to run the web interface from a locally checked out version of MAAS, please use [docker-maas-dev](https://github.com/ubuntudesign/docker-maas-dev).
+This build doesn't include any initial data.
+
+*API ACCESS:* http://localhost:5240/MAAS/
+
 
 Usage
 ---
@@ -11,26 +15,37 @@ Usage
 You can run the Maas web interface statically (*not* for development) as follows:
 
 ``` bash
-docker run --tty --interactive --publish 5240:5240 ubuntudesign/maas
+docker run --tty --interactive --publish 127.0.0.1:5240:5240 foexle/maas-server
 ```
   
 Now visit <http://localhost:5240> to view the site.
 
 *NB:* If you're on *MacOS* or *Windows* use `http://{your-docker-vm-ip-address}:5240` instead.
 
+
+
 ### Built in credentials
 
 You can login to the web interface with one of:
 
-    usernames: "admin" or "test"
+    usernames: "test"
     password: test
 
 Rebuild image
 ---
 
-You can rebuild the image from [the Github repository](https://github.com/ubuntudesign/docker-maas) with:
-
 ``` bash
-make build
-docker push ubuntudesign/maas
+docker build - < Dockerfile
 ```
+
+*NB:* Hardcoded delay of 10 seconds at the first start of regiond. This delay is required to use the maas client and init admin user
+
+
+Additional notes
+---
+The regiond server produces some errors which are related to missing sudo package and systemd. 
+
+### TODO
+* Create compose file and exclude postgres
+
+
