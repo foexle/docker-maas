@@ -15,7 +15,7 @@ Usage
 You can run the Maas web interface statically (*not* for development) as follows:
 
 ``` bash
-docker run --tty --interactive --publish 127.0.0.1:5240:5240 foexle/maas-server
+docker run -d -p 127.0.0.1:5240:5240 --name maas-server foexle/maas-server
 ```
   
 Now visit <http://localhost:5240> to view the site.
