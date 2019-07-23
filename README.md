@@ -1,6 +1,7 @@
 Docker image for the Maas web interface
 ===
-This Docker image provides MAAS UI and API. This is not yet a fully functional MAAS environment it's designed for API testing purposes. 
+This Docker image provides MAAS UI and API. This is not yet a fully functional MAAS environment it's designed for API
+testing purposes. Furthermore it's not recommended to use systemd in Docker! 
 
 A [Docker image](https://hub.docker.com/r/foexle/maas-server) for testing the [MAAS](https://launchpad.net/maas) web interface.
 
@@ -22,6 +23,9 @@ Now visit <http://localhost:5240> to view the site.
 
 *NB:* If you're on *MacOS* or *Windows* use `http://{your-docker-vm-ip-address}:5240` instead.
 
+
+### Docker compose
+Please follow the [official installation instructions](https://docs.docker.com/compose/install/)
 
 
 ### Built in credentials
@@ -46,6 +50,6 @@ Additional notes
 The regiond server produces some errors which are related to missing sudo package and systemd. 
 
 ### TODO
-* Create compose file and exclude postgres
-
+* Create compose file and exclude postgres and remove systemd startup
+* Configure MAAS with postgres credentials
 
